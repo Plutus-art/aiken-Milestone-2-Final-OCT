@@ -136,3 +136,99 @@ Comprehensive testing documentation that includes test plans, test cases, and re
    
 ## Aiken-Lang Functions Testing
    -Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Aiken-Lang%20Functions%20Testing.md
+
+
+### Write Test Cases: 
+Develop comprehensive test cases that cover all functional and non-functional aspects of the new features, including edge cases and failure scenarios.
+# Developed Functions test results & reports:
+-Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Aiken-Lang%20Smart%20Contracts%20-%20Test%20Results%20and%20Reports.md
+# Development New Features results & reports:
+-Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Development%20New%20Features%20results%20%26%20reports.md
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+### Execute Testing: Conduct the testing as per the test plans, including:
+
+Link: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/tree/main/Executive-Testing
+
+1. Unit Testing: Aiken-lang boasts a built-in unit testing framework, making it convenient to write and execute tests directly within the language [2]. Here's a breakdown of unit testing in Aiken:
+Concepts:
+
+# Test Function: A unit test is defined as a function with no arguments that returns a boolean value. The test passes if the function returns True, and fails otherwise.
+Placement: You can write unit tests anywhere within an Aiken module, alongside your regular code. This allows for close integration and testing of specific functionalities.
+Execution: The aiken check command is used to parse, collect, run all the tests in your code, and generate a report detailing the results.
+Benefits:
+
+-Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Aiken-Lang%20Functions%20Testing.md
+
+Same Virtual Machine: Aiken unit tests leverage the same virtual machine used for on-chain smart contract execution. This ensures your tests run in the same environment as your deployed contracts, promoting code reliability [1].
+Reasoning: Since tests are written in Aiken, you can leverage the language's features for reasoning about test behavior and expected outcomes. This simplifies the testing process [1].
+
+
+2. Integration Testing: 
+To ensure that new features integrate seamlessly with existing features and the broader Cardano ecosystem.
+-Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Integratipon%20testing.md
+
+4. Performance Testing: To assess the performance improvements brought by the new features under various conditions.
+-Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20%20Aiken-lang%20Smart%20Contract%20Performance%20Testing.md
+
+
+5. Testing Documentation: 
+Compile the results from all testing phases into comprehensive documentation. This should include the context of the tests, how they were conducted, the results obtained, and any actions taken in response to the findings.
+
+-Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20%20Aiken-lang%20Smart%20Contract%20Performance%20Testing.md
+Link: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/tree/main/Test%20Cases
+
+7. Feature Documentation: 
+Document the developed features, providing clear and concise information on their purpose, usage, and integration into the Aiken language. Include examples and best practices to assist developers in adopting these new features.
+
+-Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Feature%20design.md
+-Link: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/tree/main/Feature%20Design
+
+9. Peer Review: 
+Aiken-lang is a promising smart contract language designed for the Cardano blockchain. Here's a peer review based on available information:
+Strengths:
+-Pure Functional: Aiken promotes a functional programming paradigm, leading to potentially more predictable and easier to reason about code compared to imperative languages.
+Small and Easy to Learn: Aiken's focus on simplicity makes it approachable for developers new to smart contract development.
+-Strong Static Typing: Static typing enforces type safety, reducing runtime errors and improving code reliability.
+Modern Development Environment: Aiken provides a zero-configuration development experience with features like auto-formatting and editor integration.
+-Baked-in Unit Testing: Integrated unit testing facilitates writing robust smart contracts.
+Areas for Improvement:
+-Limited Ecosystem: As a relatively new language, Aiken might have a smaller developer community and fewer available libraries compared to established languages.
+-Cardano-Specific: Aiken's focus on Cardano might limit its portability to other blockchains.
+-Security Considerations: While Aiken promotes some security features, a thorough security audit is crucial for any smart contract language.
+-Additional Considerations:
+Random Number Generation: Cardano's lack of native Chainlink VRF support requires alternative approaches within Aiken for secure on-chain randomness.
+-Inheritance: Cardano doesn't support inheritance for smart contracts. Aiken's documentation should clarify this limitation.
+Overall, Aiken-lang is a well-designed language with a focus on simplicity and security for Cardano smart contract development. As the language matures and the ecosystem grows, it has the potential to become a popular choice for blockchain developers.
+For a more comprehensive review, consider these aspects:
+-Performance: Evaluate the efficiency of compiled Aiken code compared to other languages on Cardano.
+-Tooling: Assess the maturity and capabilities of Aiken's development tools.
+-Community: Gauge the size and activity of the Aiken developer community.
+-Real-world Usage: Explore existing projects built with Aiken to understand its practical applications.
+
+
+### Community Links
+
+https://github.com/aiken-lang/aiken/discussions
+https://cardanoupdates.com/aiken-lang/aiken
+https://www.reddit.com/r/cardano/comments/11d9cuj/aiken_simplifies_writing_smart_contracts_for/?rdt=40341
+https://www.lidonation.com/en/proposals/aiken-open-source-smart-contract-library-by-meshjs-trustlevel-f11
+https://crates.io/teams/github:aiken-lang:maintainers
+https://discord.gg/EscYHV8v
+https://www.lidonation.com/en/posts/the-heartbeat-of-cardano-shifts-to-aiken
+https://x.com/aiken_eng?lang=en
+https://cardano.ideascale.com/c/idea/112062
+https://cardanofoundation.org/blog/aiken-the-future-of-smart-contracts
+https://cardano.ideascale.com/c/idea/112062/activity
+https://indigoprotocol1.medium.com/optimizing-the-throughput-of-cardano-the-evolution-of-indigo-protocols-smart-contracts-a498ecc42823
+https://forum.cardano.org/t/cardano-community-digest-17-april-2023/116916
+
+References:
+https://github.com/aiken-lang/aiken/discussions
+https://www.reddit.com/r/cardano/comments/11d9cuj/aiken_simplifies_writing_smart_contracts_for/?rdt=62062
+https://www.reddit.com/r/CardanoDevelopers/comments/1fyybjb/aikenlang_smarty_contract_new_experiment_weighted/
+
+
