@@ -1,4 +1,4 @@
-Milestone 2 Language Development - Develop and Test the Enhanced Aiken Marketplace Contract Features	
+### Milestone 2 Language Development - Develop and Test the Enhanced Aiken Marketplace Contract Features	
 
 Milestone Outputs	
 
@@ -121,11 +121,18 @@ Comprehensive testing documentation that includes test plans, test cases, and re
 ## Develop Test Plans: Create detailed test plans for each new feature, specifying the testing objectives, scope, approach, resources, and schedule.
 
 ### Test Plan: 
-Developed Features & Functions: List of all functions available on Aiken
+
+## Developed Features & Functions: 
 --- Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20The%20developed%20features.md
+## List of all functions available on Aiken
 
-### Aiken-Plooty Milestone 2
-Developing New Features & Test Result: List of new functions we want to develop
-    --Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Aiken%20language%20features%20(focus%20on%20marketplace%20smart%20contracts).md
-Aiken-Lang Functions Testing
+-Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20List%20of%20all%20functions%20on%20aiken.md
+### List of all new developed functions available on Aiken
 
+ --Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Aiken%20language%20features%20(focus%20on%20marketplace%20smart%20contracts).md
+ 
+## Developing New Features & Test Result: List of new functions we want to develop
+-Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20List%20of%20all%20new%20developed%20functions%20available%20on%20Aiken.md
+   
+## Aiken-Lang Functions Testing
+   -Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Aiken-Lang%20Functions%20Testing.md
