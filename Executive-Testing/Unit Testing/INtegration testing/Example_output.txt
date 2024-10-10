@@ -1,0 +1,2 @@
+mint and transfer NFT between two wallets: Passed
+auction listing and bid placement on NFT: Passed

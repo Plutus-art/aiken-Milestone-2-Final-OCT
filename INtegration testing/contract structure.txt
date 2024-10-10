@@ -1,0 +1,5 @@
+/src
+    /contracts
+        nft_contract.aiken
+/tests
+    integration_test.aiken

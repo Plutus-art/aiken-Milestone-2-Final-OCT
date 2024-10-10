@@ -1,0 +1,217 @@
+# Aiken-lang Smart Contract Features Documentation
+
+This documentation provides clear and concise information on the features developed for smart contracts in Aiken-lang. It includes descriptions of each feature, its purpose, usage, integration steps, and examples. Additionally, best practices are included to help developers adopt these new functions efficiently.
+
+---
+
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+    - [1. NFT Minting](#1-nft-minting)
+    - [2. DEX Swap](#2-dex-swap)
+    - [3. Secondary Sales with Royalties](#3-secondary-sales-with-royalties)
+    - [4. Basic Token Transfer](#4-basic-token-transfer)
+- [Integration Guide](#integration-guide)
+- [Best Practices](#best-practices)
+- [Examples](#examples)
+
+---
+
+## Overview
+
+Aiken-lang is a lightweight, type-safe language for writing smart contracts on the Cardano blockchain. This documentation covers the newly developed features, including NFT minting, decentralized exchange (DEX) swaps, secondary sales royalty handling, and basic token transfers. Each feature is explained with use cases and examples to guide developers on how to integrate and use these features in their smart contracts.
+
+---
+
+## Features
+
+### 1. NFT Minting
+
+#### Purpose
+The **NFT Minting** feature allows a contract to create and assign ownership of non-fungible tokens (NFTs) to specific users. This feature is crucial for projects that want to create unique digital assets on the Cardano blockchain, such as art, collectibles, or event tickets.
+
+#### Usage
+The function `mint_nft` is used to mint an NFT and assign ownership to a designated address.
+
+#### Code Snippet
+
+```aiken
+xfunc mint_nft(nft_id: NFTID, owner: Address) -> Bool {
+    -- Mint a new NFT with a unique identifier and assign it to an owner
+    let new_nft = create_nft(nft_id, owner);
+    
+    -- Return True if minting is successful, False otherwise
+    return new_nft != null;
+}
+```
+
+#### Best Practices
+- Ensure that `nft_id` is unique for each new NFT to avoid duplication.
+- Verify that the owner's address is valid on the Cardano blockchain.
+- Log minting events to keep track of NFT creation and transfers.
+
+---
+
+### 2. DEX Swap
+
+#### Purpose
+The **DEX Swap** feature allows for decentralized token swapping between users. This feature is essential for enabling liquidity and token exchanges within decentralized finance (DeFi) applications on Cardano.
+
+#### Usage
+The function `dex_swap` allows swapping between two tokens based on predefined rules or liquidity pools.
+
+#### Code Snippet
+
+```aiken
+xfunc dex_swap(token_in: Token, amount_in: Amount, token_out: Token) -> Bool {
+    -- Calculate the amount of token_out that the user will receive
+    let swapped_amount = calculate_swap(token_in, amount_in, token_out);
+
+    -- Ensure the swap is valid and return True if successful
+    return swapped_amount > 0;
+}
+```
+
+#### Best Practices
+- Use predefined exchange rates or integrate with liquidity pools to calculate fair swap ratios.
+- Implement safety checks to prevent slippage or unfavorable trades.
+- Log the swap transaction to provide transparency and allow audits.
+
+---
+
+### 3. Secondary Sales with Royalties
+
+#### Purpose
+The **Secondary Sales with Royalties** feature ensures that creators receive a percentage of sales when their NFTs are resold. This feature is critical for promoting long-term value creation for artists and creators in the NFT space.
+
+#### Usage
+The function `handle_secondary_sale` calculates and pays the royalty to the original creator whenever an NFT is sold on the secondary market.
+
+#### Code Snippet
+
+```aiken
+xfunc handle_secondary_sale(nft_id: NFTID, sale_price: Amount) -> Bool {
+    -- Calculate the royalty based on the sale price
+    let royalty = calculate_royalty(nft_id, sale_price);
+
+    -- Pay the royalty to the original creator
+    pay_creator(nft_id.creator, royalty);
+
+    -- Return True if the royalty payment is successful
+    return royalty > 0;
+}
+```
+
+#### Best Practices
+- Use a standard royalty percentage (e.g., 5-10%) or make it customizable per NFT.
+- Ensure that the original creator's address is stored securely within the contract.
+- Handle edge cases where royalty calculations may result in small or negligible amounts.
+
+---
+
+### 4. Basic Token Transfer
+
+#### Purpose
+The **Basic Token Transfer** feature allows for the direct transfer of fungible tokens from one user to another. This is essential for any decentralized application that involves payments or token transactions.
+
+#### Usage
+The function `transfer_tokens` transfers tokens between two addresses on the Cardano blockchain.
+
+#### Code Snippet
+
+```aiken
+xfunc transfer_tokens(sender: Address, recipient: Address, amount: Amount) -> Bool {
+    -- Transfer the specified amount from sender to recipient
+    let transfer_result = execute_transfer(sender, recipient, amount);
+
+    -- Return True if the transfer is successful, False otherwise
+    return transfer_result;
+}
+```
+
+#### Best Practices
+- Check for sufficient balance in the sender’s account before initiating a transfer.
+- Handle failure cases where the transfer might not go through due to network issues or insufficient funds.
+- Log transfer events for auditability.
+
+---
+
+## Integration Guide
+
+To integrate these features into your Aiken-lang smart contract, follow the steps below:
+
+1. **Install Aiken-lang**: Ensure that you have Aiken-lang installed and properly configured. Follow the installation guide from the [official documentation](https://aiken-lang.org/docs/installation).
+
+2. **Create Your Contract**: Write your smart contract by including the necessary features. You can add the NFT minting, DEX swap, or royalty handling features based on your project needs.
+
+3. **Compile and Deploy**: Use Aiken-lang's build tools to compile your contract and deploy it to the Cardano testnet or mainnet. Example command:
+   ```bash
+   aiken build
+   aiken testnet-deploy --contract path/to/contract
+   ```
+
+4. **Test Your Contract**: It is essential to test your smart contract before deploying it on the mainnet. Run unit tests and deploy to the testnet for further validation.
+
+   Example test:
+   ```aiken
+   xfunc test_nft_minting() -> Bool {
+       let nft_id = NFTID("test_nft");
+       let owner = Address.from_bech32("addr_test1...");
+       
+       -- Test the minting process
+       let result = mint_nft(nft_id, owner);
+       
+       return result;
+   }
+   ```
+
+5. **Monitor and Optimize**: Once deployed, monitor your smart contract for performance, errors, and gas usage. Optimize where necessary to improve efficiency.
+
+---
+
+## Best Practices
+
+1. **Security**: Always validate inputs, such as addresses and token amounts, to prevent malicious attacks. 
+2. **Efficiency**: Ensure that calculations like royalties and swaps are optimized to minimize gas usage.
+3. **Auditing and Logging**: Log all significant events (like minting, transfers, and sales) to ensure transparency and enable future audits.
+4. **Modularity**: Keep your smart contracts modular. Separate concerns like token transfers, royalty handling, and swaps into individual functions for better readability and maintainability.
+5. **Testing**: Thoroughly test each feature in isolation before integrating it into larger projects. Use unit tests and run on testnets to ensure stability.
+
+---
+
+## Examples
+
+### Example 1: Minting an NFT
+
+```aiken
+let nft_id = NFTID("unique_art_001");
+let owner = Address.from_bech32("addr_test1...");
+let mint_result = mint_nft(nft_id, owner);
+
+assert(mint_result == True, "NFT minting failed.");
+```
+
+### Example 2: DEX Token Swap
+
+```aiken
+let token_in = Token("TokenA");
+let token_out = Token("TokenB");
+let amount_in = Amount(100);
+let swap_result = dex_swap(token_in, amount_in, token_out);
+
+assert(swap_result == True, "DEX swap failed.");
+```
+
+### Example 3: Paying Royalties on Secondary Sale
+
+```aiken
+let nft_id = NFTID("artwork_001");
+let sale_price = Amount(5000);
+let royalty_result = handle_secondary_sale(nft_id, sale_price);
+
+assert(royalty_result == True, "Royalty payment failed.");
+```
+
+---
+
+

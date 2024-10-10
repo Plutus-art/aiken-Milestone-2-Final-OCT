@@ -1,0 +1,11 @@
+-- Validator for handling the NFT sale
+validator sellNFT (datum: Listing) (redeemer: Purchase) (ctx: ScriptContext) : Bool {
+    let
+        -- Helper function to check if payment is correct
+        paymentValid : Bool = valuePaidTo ctx.txInfo datum.seller == datum.price
+
+        -- Helper function to check if buyer signed the transaction
+        buyerSigned : Bool = txSignedBy ctx.txInfo redeemer.buyer
+    in
+        traceIfFalse "Incorrect payment or buyer not signed" (paymentValid && buyerSigned)
+}

@@ -1,0 +1,17 @@
+Aiken-lang Smart Contract Test Results
+--------------------------------------
+Running tests...
+
+Testing NFT Minting...
+[OK] Test passed: NFT minting was successful.
+
+Testing DEX Swap...
+[FAIL] Test failed: DEX swap did not return expected result.
+
+Testing Secondary Sale...
+[OK] Test passed: Secondary sale royalty was paid successfully.
+
+Testing Token Transfer...
+[OK] Test passed: Token transfer was successful.
+
+Tests complete. See test_results.log for detailed output.

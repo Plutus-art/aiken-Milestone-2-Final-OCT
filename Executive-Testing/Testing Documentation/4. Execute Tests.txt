@@ -1,0 +1,8 @@
+### TO run the tests manually, use:
+
+aiken test path/to/test_file
+
+## If using a script like the one above, just run:
+
+
+./run_tests.sh

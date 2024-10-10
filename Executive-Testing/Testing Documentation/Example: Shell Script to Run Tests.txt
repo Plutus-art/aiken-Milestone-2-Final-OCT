@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "Running Aiken-lang Smart Contract Tests..."
+
+# Compile the contracts
+aiken build
+
+# Run each test case and capture results
+echo "Testing NFT Minting..."
+aiken test mint_nft_test
+
+echo "Testing DEX Swap..."
+aiken test dex_swap_test
+
+echo "Testing Secondary Sale..."
+aiken test secondary_sale_test
+
+echo "Testing Token Transfer..."
+aiken test token_transfer_test
+
+echo "All tests executed."

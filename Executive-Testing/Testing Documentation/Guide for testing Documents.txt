@@ -1,0 +1,16 @@
+To test every Aiken-lang smart contract, including both new and old features, we'll follow a structured approach that includes defining test cases for the features, executing them in a test environment, and capturing the results. Below is a detailed guide with code snippets for testing the contracts and reporting the results.
+
+Steps to Test Aiken-lang Smart Contracts:
+Set Up Test Environment
+Write Test Cases for Smart Contracts
+Automate the Testing Process
+Execute Tests
+Capture and Report Results
+
+
+### Ensure that you have the following:
+
+A local testnet or access to a public testnet.
+Aiken-lang installed.
+Cardano node or access to a test wallet to simulate transactions.
+You can install Aiken-lang following the official installation guide.

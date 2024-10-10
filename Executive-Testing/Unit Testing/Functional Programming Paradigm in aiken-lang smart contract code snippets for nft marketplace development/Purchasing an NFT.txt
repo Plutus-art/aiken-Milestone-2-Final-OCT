@@ -1,0 +1,5 @@
+-- Redeemer representing the buyer
+buyNFT : PubKeyHash -> Purchase
+buyNFT buyer = {
+    buyer = buyer
+}

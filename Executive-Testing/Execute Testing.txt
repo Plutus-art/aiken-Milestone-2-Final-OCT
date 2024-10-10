@@ -1,0 +1,8 @@
+Conduct the testing as per the test plans, including:
+
+Unit Testing: To verify that individual components of the new features work correctly in isolation.
+Integration Testing: To ensure that new features integrate seamlessly with existing features and the broader Cardano ecosystem.
+Performance Testing: To assess the performance improvements brought by the new features under various conditions.
+Testing Documentation: Compile the results from all testing phases into comprehensive documentation. This should include the context of the tests, how they were conducted, the results obtained, and any actions taken in response to the findings.
+Feature Documentation: Document the developed features, providing clear and concise information on their purpose, usage, and integration into the Aiken language. Include examples and best practices to assist developers in adopting these new features.
+Peer Review: Conduct peer reviews of both the developed features and the accompanying documentation to ensure accuracy, completeness, and clarity

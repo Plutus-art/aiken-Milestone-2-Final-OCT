@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Create a log file to capture results
+LOGFILE="test_results.log"
+echo "Aiken-lang Smart Contract Test Results" > $LOGFILE
+
+# Run each test case and capture results
+echo "Running tests..." | tee -a $LOGFILE
+
+echo "Testing NFT Minting..." | tee -a $LOGFILE
+aiken test mint_nft_test | tee -a $LOGFILE
+
+echo "Testing DEX Swap..." | tee -a $LOGFILE
+aiken test dex_swap_test | tee -a $LOGFILE
+
+echo "Testing Secondary Sale..." | tee -a $LOGFILE
+aiken test secondary_sale_test | tee -a $LOGFILE
+
+echo "Testing Token Transfer..." | tee -a $LOGFILE
+aiken test token_transfer_test | tee -a $LOGFILE
+
+echo "Tests complete. See $LOGFILE for results."

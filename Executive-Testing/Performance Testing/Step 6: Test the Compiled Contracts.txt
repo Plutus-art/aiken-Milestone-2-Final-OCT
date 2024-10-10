@@ -1,0 +1,2 @@
+aiken compile path/to/contract --output-path ./build
+aiken testnet-deploy --network testnet --contract ./build/contract.plutus

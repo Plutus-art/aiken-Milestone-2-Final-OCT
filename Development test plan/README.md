@@ -1,0 +1,1 @@
+To provide comprehensive testing documentation for a smart contract in Aiken-lang (a smart contract development language for Cardano), the process will involve crafting detailed test plans, writing test cases, and documenting the results of unit tests, integration tests, and performance tests.
