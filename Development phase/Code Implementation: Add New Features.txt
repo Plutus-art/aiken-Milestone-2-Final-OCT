@@ -1,0 +1,32 @@
+// src/components/FilterBar.js
+
+import React, { useState } from 'react';
+
+const FilterBar = ({ onFilterChange }) => {
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+
+  const handleFilterChange = () => {
+    onFilterChange({ minPrice, maxPrice });
+  };
+
+  return (
+    <div className="filter-bar">
+      <input 
+        type="number" 
+        placeholder="Min Price" 
+        value={minPrice} 
+        onChange={(e) => setMinPrice(e.target.value)} 
+      />
+      <input 
+        type="number" 
+        placeholder="Max Price" 
+        value={maxPrice} 
+        onChange={(e) => setMaxPrice(e.target.value)} 
+      />
+      <button onClick={handleFilterChange}>Apply Filter</button>
+    </div>
+  );
+};
+
+export default FilterBar;

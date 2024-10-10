@@ -1,0 +1,2 @@
+# Create and switch to a new branch for the feature
+git checkout -b feature/new-filter-options

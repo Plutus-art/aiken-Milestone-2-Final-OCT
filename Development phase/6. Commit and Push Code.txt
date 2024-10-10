@@ -1,0 +1,8 @@
+# Stage the changes
+git add .
+
+# Commit the changes
+git commit -m "Added price filter feature to NFT marketplace"
+
+# Push the feature branch
+git push origin feature/new-filter-options

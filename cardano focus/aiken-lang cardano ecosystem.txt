@@ -1,0 +1,17 @@
+-- Aiken NFT Marketplace Smart Contract
+
+-- Data types for representing NFT listing and redeemer
+type Listing = { seller: PubKeyHash, price: Value }
+type Purchase = { buyer: PubKeyHash }
+
+-- Validator for handling the NFT sale
+validator sellNFT (datum: Listing) (redeemer: Purchase) (ctx: ScriptContext) : Bool {
+    let
+        -- Check that the correct ADA is sent to the seller
+        paymentValid = valuePaidTo ctx.txInfo datum.seller == datum.price
+
+        -- Check that the buyer provided the NFT
+        buyerSigned = txSignedBy ctx.txInfo redeemer.buyer
+    in
+        traceIfFalse "Incorrect payment or buyer not signed" (paymentValid && buyerSigned)
+}

@@ -1,0 +1,9 @@
+# Clone the repository
+git clone https://github.com/your-org/nft-marketplace.git
+cd nft-marketplace
+
+# Install dependencies (e.g., with npm)
+npm install
+
+# Run the project locally
+npm run dev
