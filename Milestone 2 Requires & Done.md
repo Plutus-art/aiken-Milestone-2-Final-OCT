@@ -33,9 +33,9 @@ Developer Experience:
 Type Safety: Aiken could enforce type annotations to prevent runtime errors and make code easier to understand and maintain.
 Functional Programming Paradigm: This paradigm can simplify reasoning about program behavior and potentially reduce bugs.
 
-# Feature Design: 
+### Feature Design: 
 Aiken-lang's feature design centers around two key areas: developer experience and robustness for smart contracts. Here's a breakdown of some potential design choices based on this focus:
-
+# Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Feature%20design.md
 Developer Experience:
 Type Safety: Aiken could enforce type annotations to prevent runtime errors and make code easier to understand and maintain.
 Functional Programming Paradigm: This paradigm can simplify reasoning about program behavior and potentially reduce bugs.
@@ -44,9 +44,19 @@ Excellent Error Messages: Informative error messages can help developers pinpoin
 Rich Standard Library: A well-stocked library with pre-built functions and data structures can save developers time and effort.
 
 
-# Robustness for Smart Contracts:
+### Robustness for Smart Contracts:
+# Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Robustness%20for%20Smart%20Contracts%3A.md
 Immutability: Encouraging immutable data structures can prevent accidental modification of state and potential security vulnerabilities.
 Formal Verification: Aiken might integrate with tools for formal verification, allowing developers to mathematically prove the correctness of their code.
 Resource Management: The language could have built-in mechanisms for managing resources like memory and computation to prevent bugs and denial-of-service attacks.
 Access Control: Features like fine-grained access control can help ensure only authorized users can interact with the smart contract.
+
+###  Focus on Cardano:
+## Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/cardano%20focus/aiken-lang%20cardano%20ecosystem.txt
+Unlike general-purpose languages, Aiken is built with Cardano in mind. It provides a high-quality toolkit specifically for developing reliable smart contracts on the Cardano blockchain.
+
+### Simplicity and Manageability:
+##Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Simplicity%20aiken-lang
+Considering the critical nature of smart contracts, Aiken keeps the language itself small and focused. This allows for easier understanding and reduces the risk of introducing vulnerabilities.
+
 
