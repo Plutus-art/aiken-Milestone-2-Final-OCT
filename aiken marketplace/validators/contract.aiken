@@ -1,0 +1,215 @@
+
+// Define basic types
+type Address = String
+
+// NFT struct: represents an NFT with owner, price, and status
+struct NFT {
+    id: String,
+    owner: Address,
+    price: u64,
+    status: Status,
+}
+
+// Enum to represent the NFT's status
+enum Status {
+    Available,
+    Sold,
+    Delisted,
+    Auctioning,
+}
+
+// Auction struct: represents an auction for an NFT
+struct Auction {
+    nft_id: String,
+    seller: Address,
+    highest_bidder: Address,
+    highest_bid: u64,
+    status: AuctionStatus,
+}
+
+// AuctionStatus: represents the status of the auction
+enum AuctionStatus {
+    Active,
+    Ended,
+}
+
+// Marketplace struct: stores fee information and marketplace owner
+struct Marketplace {
+    fee_percentage: u64,  // Marketplace fee in percentage (e.g., 1%)
+    owner: Address,
+}
+
+// Struct for user staking information
+struct Staking {
+    user: Address,
+    staked_amount: u64,
+    rewards: u64,
+}
+
+// Function to list an NFT for sale
+pub fn list_nft(id: String, owner: Address, price: u64, marketplace: &Marketplace) -> Result<NFT, String> {
+    if price > 0 {
+        Ok(NFT {
+            id,
+            owner,
+            price,
+            status: Status::Available,
+        })
+    } else {
+        Err("Price must be greater than zero".to_string())
+    }
+}
+
+// Function to delist an NFT (cancel listing)
+pub fn delist_nft(nft: &mut NFT, owner: Address) -> Result<(), String> {
+    if nft.owner == owner && matches!(nft.status, Status::Available) {
+        nft.status = Status::Delisted;
+        Ok(())
+    } else {
+        Err("Cannot delist the NFT".to_string())
+    }
+}
+
+// Function to buy an NFT
+pub fn buy_nft(nft: &mut NFT, buyer: Address, marketplace: &Marketplace) -> Result<(), String> {
+    if matches!(nft.status, Status::Available) {
+        let fee = (nft.price * marketplace.fee_percentage) / 100;
+        println!("Marketplace owner {} receives fee of {}", marketplace.owner, fee);
+        println!("Seller {} receives {}", nft.owner, nft.price - fee);
+
+        nft.owner = buyer;
+        nft.status = Status::Sold;
+        Ok(())
+    } else {
+        Err("NFT is not available for sale".to_string())
+    }
+}
+
+// Function to start an auction
+pub fn start_auction(nft: &mut NFT, seller: Address) -> Result<Auction, String> {
+    if nft.owner == seller && matches!(nft.status, Status::Available) {
+        nft.status = Status::Auctioning;
+        Ok(Auction {
+            nft_id: nft.id.clone(),
+            seller,
+            highest_bidder: "".to_string(),
+            highest_bid: 0,
+            status: AuctionStatus::Active,
+        })
+    } else {
+        Err("Only the owner can start an auction".to_string())
+    }
+}
+
+// Function to bid in an auction
+pub fn bid_in_auction(auction: &mut Auction, bidder: Address, amount: u64) -> Result<(), String> {
+    if matches!(auction.status, AuctionStatus::Active) && amount > auction.highest_bid {
+        auction.highest_bidder = bidder;
+        auction.highest_bid = amount;
+        Ok(())
+    } else {
+        Err("Bid amount is too low or auction is not active".to_string())
+    }
+}
+
+// Function to end an auction and transfer ownership
+pub fn end_auction(auction: &mut Auction, nft: &mut NFT, marketplace: &Marketplace) -> Result<(), String> {
+    if matches!(auction.status, AuctionStatus::Active) {
+        let fee = (auction.highest_bid * marketplace.fee_percentage) / 100;
+        println!("Marketplace owner {} receives fee of {}", marketplace.owner, fee);
+        println!("Seller {} receives {}", auction.seller, auction.highest_bid - fee);
+
+        nft.owner = auction.highest_bidder.clone();
+        nft.status = Status::Sold;
+        auction.status = AuctionStatus::Ended;
+        Ok(())
+    } else {
+        Err("Auction is not active".to_string())
+    }
+}
+
+// Function to stake tokens
+pub fn stake_tokens(user: Address, amount: u64) -> Staking {
+    Staking {
+        user,
+        staked_amount: amount,
+        rewards: 0,  // Initialize rewards to 0
+    }
+}
+
+// Test the functionalities
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_list_nft_success() {
+        let marketplace = Marketplace {
+            fee_percentage: 1,
+            owner: "market_owner".to_string(),
+        };
+
+        let nft = list_nft("nft_001".to_string(), "seller".to_string(), 100, &marketplace);
+        assert!(nft.is_ok());
+    }
+
+    #[test]
+    fn test_auction_and_bidding() {
+        let marketplace = Marketplace {
+            fee_percentage: 1,
+            owner: "market_owner".to_string(),
+        };
+
+        let mut nft = NFT {
+            id: "nft_001".to_string(),
+            owner: "seller".to_string(),
+            price: 100,
+            status: Status::Available,
+        };
+
+        let mut auction = start_auction(&mut nft, "seller".to_string()).unwrap();
+
+        assert_eq!(auction.highest_bid, 0);
+
+        // Bid on the auction
+        bid_in_auction(&mut auction, "bidder_1".to_string(), 200).unwrap();
+        assert_eq!(auction.highest_bidder, "bidder_1");
+        assert_eq!(auction.highest_bid, 200);
+
+        // End the auction
+        end_auction(&mut auction, &mut nft, &marketplace).unwrap();
+        assert_eq!(nft.owner, "bidder_1");
+    }
+}
+
+fn main() {
+    let marketplace = Marketplace {
+        fee_percentage: 1,
+        owner: "market_owner".to_string(),
+    };
+
+    // Example listing
+    let nft_result = list_nft("nft_001".to_string(), "seller".to_string(), 100, &marketplace);
+    if let Ok(mut nft) = nft_result {
+        println!("NFT listed with ID: {}, price: {}", nft.id, nft.price);
+
+        // Start auction
+        if let Ok(mut auction) = start_auction(&mut nft, "seller".to_string()) {
+            println!("Auction started for NFT: {}", nft.id);
+
+            // Bid on auction
+            if bid_in_auction(&mut auction, "bidder_1".to_string(), 200).is_ok() {
+                println!("Bid placed by bidder_1 for 200");
+
+                // End auction
+                if end_auction(&mut auction, &mut nft, &marketplace).is_ok() {
+                    println!("Auction ended. NFT sold to {}", nft.owner);
+                }
+            }
+        }
+    }
+
+    // Example staking
+    let staking = stake_tokens("staker_1".to_string(), 1000);
+    println!("User {} staked {} tokens", staking.user, staking.staked_amount);
+}

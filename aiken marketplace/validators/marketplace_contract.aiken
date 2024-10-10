@@ -1,0 +1,224 @@
+
+// Define an Address type (could be wallet or smart contract address)
+type Address = String;
+
+// Define a struct for the NFT
+struct NFT {
+    id: String,
+    owner: Address,
+    price: u64,  // Price for sale
+    status: Status,
+    auction: Option<Auction>,  // Auction details if any
+}
+
+// Enum to represent the NFT's status
+enum Status {
+    Available,
+    Sold,
+    Delisted,
+}
+
+// Auction struct to handle bidding
+struct Auction {
+    current_bid: u64,
+    highest_bidder: Address,
+    min_bid_increment: u64,  // Minimum increase from the last bid
+    end_time: u64,  // Unix timestamp for auction end
+}
+
+// Define a struct for the Marketplace
+struct Marketplace {
+    fee_percentage: u64,  // Marketplace fee as a percentage (e.g., 2%)
+    owner: Address,       // Owner of the marketplace
+}
+
+// Function to list an NFT for sale (with or without auction)
+pub fn list_nft(id: String, owner: Address, price: u64, auction: Option<Auction>, marketplace: &Marketplace) -> Result<NFT, String> {
+    if price > 0 {
+        Ok(NFT {
+            id,
+            owner,
+            price,
+            status: Status::Available,
+            auction,
+        })
+    } else {
+        Err("Price must be greater than zero".to_string())
+    }
+}
+
+// Function to delist an NFT (cancel listing)
+pub fn delist_nft(nft: &mut NFT, owner: Address) -> Result<(), String> {
+    if nft.owner == owner {
+        if let Status::Available = nft.status {
+            nft.status = Status::Delisted;
+            Ok(())
+        } else {
+            Err("Cannot delist: NFT is not available".to_string())
+        }
+    } else {
+        Err("Only the owner can delist the NFT".to_string())
+    }
+}
+
+// Function to buy an NFT
+pub fn buy_nft(nft: &mut NFT, buyer: Address, marketplace: &Marketplace) -> Result<(), String> {
+    if let Status::Available = nft.status {
+        // Calculate the marketplace fee
+        let fee = (nft.price * marketplace.fee_percentage) / 100;
+
+        // Transfer the fee to the marketplace owner and the remaining amount to the seller
+        println!("Marketplace owner {} receives fee of {}", marketplace.owner, fee);
+        println!("Seller {} receives {}", nft.owner, nft.price - fee);
+
+        // Transfer ownership to the buyer
+        nft.owner = buyer;
+        nft.status = Status::Sold;
+        Ok(())
+    } else {
+        Err("NFT is not available for sale".to_string())
+    }
+}
+
+// Function to start an auction
+pub fn start_auction(nft: &mut NFT, min_bid_increment: u64, auction_end_time: u64) -> Result<(), String> {
+    if let Status::Available = nft.status {
+        nft.auction = Some(Auction {
+            current_bid: 0,
+            highest_bidder: "".to_string(),
+            min_bid_increment,
+            end_time: auction_end_time,
+        });
+        Ok(())
+    } else {
+        Err("Cannot start an auction: NFT is not available".to_string())
+    }
+}
+
+// Function to place a bid in the auction
+pub fn place_bid(nft: &mut NFT, bidder: Address, bid_amount: u64) -> Result<(), String> {
+    if let Some(auction) = &mut nft.auction {
+        if bid_amount > auction.current_bid + auction.min_bid_increment {
+            auction.current_bid = bid_amount;
+            auction.highest_bidder = bidder;
+            Ok(())
+        } else {
+            Err("Bid amount must be higher than the current bid plus the minimum increment".to_string())
+        }
+    } else {
+        Err("No auction is active for this NFT".to_string())
+    }
+}
+
+// Function to end an auction and transfer ownership
+pub fn end_auction(nft: &mut NFT, marketplace: &Marketplace) -> Result<(), String> {
+    if let Some(auction) = &nft.auction {
+        let fee = (auction.current_bid * marketplace.fee_percentage) / 100;
+        let final_amount = auction.current_bid - fee;
+
+        // Marketplace and seller earnings
+        println!("Marketplace owner {} receives fee of {}", marketplace.owner, fee);
+        println!("Seller {} receives {}", nft.owner, final_amount);
+
+        // Transfer ownership to the highest bidder
+        nft.owner = auction.highest_bidder.clone();
+        nft.status = Status::Sold;
+        nft.auction = None;  // End auction
+        Ok(())
+    } else {
+        Err("No active auction to end".to_string())
+    }
+}
+
+// Test functions
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_list_nft_success() {
+        let marketplace = Marketplace {
+            fee_percentage: 2,
+            owner: "marketplace_owner".to_string(),
+        };
+
+        let nft_result = list_nft("nft123".to_string(), "owner_address".to_string(), 1000, None, &marketplace);
+        assert!(nft_result.is_ok());
+
+        let nft = nft_result.unwrap();
+        assert_eq!(nft.id, "nft123");
+        assert_eq!(nft.owner, "owner_address");
+        assert_eq!(nft.price, 1000);
+        assert!(matches!(nft.status, Status::Available));
+    }
+
+    #[test]
+    fn test_buy_nft_success() {
+        let marketplace = Marketplace {
+            fee_percentage: 2,
+            owner: "marketplace_owner".to_string(),
+        };
+
+        let mut nft = NFT {
+            id: "nft123".to_string(),
+            owner: "owner_address".to_string(),
+            price: 1000,
+            status: Status::Available,
+            auction: None,
+        };
+
+        let buyer = "buyer_address".to_string();
+        let buy_result = buy_nft(&mut nft, buyer, &marketplace);
+        assert!(buy_result.is_ok());
+        assert_eq!(nft.owner, "buyer_address");
+        assert!(matches!(nft.status, Status::Sold));
+    }
+
+    #[test]
+    fn test_auction_bid() {
+        let marketplace = Marketplace {
+            fee_percentage: 2,
+            owner: "marketplace_owner".to_string(),
+        };
+
+        let mut nft = NFT {
+            id: "nft123".to_string(),
+            owner: "owner_address".to_string(),
+            price: 1000,
+            status: Status::Available,
+            auction: None,
+        };
+
+        // Start an auction
+        start_auction(&mut nft, 100, 9999999999).unwrap();
+
+        // Place a bid
+        let bid_result = place_bid(&mut nft, "bidder_address".to_string(), 200);
+        assert!(bid_result.is_ok());
+        assert_eq!(nft.auction.unwrap().current_bid, 200);
+    }
+
+    #[test]
+    fn test_end_auction() {
+        let marketplace = Marketplace {
+            fee_percentage: 2,
+            owner: "marketplace_owner".to_string(),
+        };
+
+        let mut nft = NFT {
+            id: "nft123".to_string(),
+            owner: "owner_address".to_string(),
+            price: 1000,
+            status: Status::Available,
+            auction: None,
+        };
+
+        // Start and end auction
+        start_auction(&mut nft, 100, 9999999999).unwrap();
+        place_bid(&mut nft, "highest_bidder".to_string(), 500).unwrap();
+        let end_result = end_auction(&mut nft, &marketplace);
+        assert!(end_result.is_ok());
+        assert_eq!(nft.owner, "highest_bidder");
+        assert!(matches!(nft.status, Status::Sold));
+    }
+}
