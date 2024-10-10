@@ -60,3 +60,37 @@ Unlike general-purpose languages, Aiken is built with Cardano in mind. It provid
 Considering the critical nature of smart contracts, Aiken keeps the language itself small and focused. This allows for easier understanding and reduces the risk of introducing vulnerabilities.
 
 
+2
+
+
+### Feature Design: 
+Aiken-lang's feature design centers around two key areas: developer experience and robustness for smart contracts. Here's a breakdown of some potential design choices based on this focus:
+
+## Developer Experience:
+-** Type Safety: Aiken could enforce type annotations to prevent runtime errors and make code easier to understand and maintain.
+    -Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Type%20Safety.md
+-** Functional Programming Paradigm: This paradigm can simplify reasoning about program behavior and potentially reduce bugs.
+    -Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Functional%20Programming%20Paradigm.md
+-** Clear and Concise Syntax: Aiken might borrow from languages like Rust or Elm to have a clean and readable syntax that reduces boilerplate code.
+    -Markdown:https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Clear%20and%20Concise%20Syntax.md
+-** Excellent Error Messages: Informative error messages can help developers pinpoint issues quickly and efficiently.
+Rich Standard Library: A well-stocked library with pre-built functions and data structures can save developers time and effort.
+   -Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Excellent%20Error%20Messages%20in%20Aiken-lang%20Development.md
+-**Robustness for Smart Contracts:
+  -Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Robustness%20for%20Smart%20Contracts%3A.md
+-**Immutability: Encouraging immutable data structures can prevent accidental modification of state and potential security vulnerabilities.
+Formal Verification: Aiken might integrate with tools for formal verification, allowing developers to mathematically prove the correctness of their code.
+    -Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Immutability.md
+-**Resource Management: The language could have built-in mechanisms for managing resources like memory and computation to prevent bugs and denial-of-service attacks.
+   -Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Resouce%20ManagementFeatures.md
+-**Access Control: Features like fine-grained access control can help ensure only authorized users can interact with the smart contract.
+    -Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Access%20Control.md
+## Additional Considerations:
+-**Interoperability: Aiken might allow integration with existing Plutus code or other languages for broader functionality.
+      -Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Integratipon%20testing.md
+-**Testing Frameworks: Support for robust testing frameworks can be crucial for catching bugs before deployment.
+     -Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Testing%20Framework.md
+
+
+
+
