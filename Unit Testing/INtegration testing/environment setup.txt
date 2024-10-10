@@ -1,0 +1,2 @@
+# Install Aiken
+curl -L https://install.aiken-lang.org | bash

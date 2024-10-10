@@ -1,2 +1,1 @@
-# Final-Milestone2-aiken-oct10
-Milestone 2 Language Development
+Milestone 2 Language Development - Develop and Test the Enhanced Aiken Marketplace Contract Features	

@@ -1,0 +1,17 @@
+-- A higher-order function to validate conditions in a reusable way
+
+-- This function accepts a condition checker and returns a validator
+fn makeValidator (check: ScriptContext -> Bool) (ctx: ScriptContext) : Bool {
+    traceIfFalse "Condition not met" (check ctx)
+}
+
+-- Define specific condition functions
+fn checkAmount (minAmount: Int) (ctx: ScriptContext) : Bool {
+    let totalValue = fold (fn (txOut: TxOut) -> Value) ctx.txInfo.outputs
+    in totalValue >= lovelace minAmount
+}
+
+-- Use the higher-order function to create a specific validator
+validator minimumAdaValidator (minAda: Int) (redeemer: Unit) (ctx: ScriptContext) : Bool {
+    makeValidator (checkAmount minAda) ctx
+}

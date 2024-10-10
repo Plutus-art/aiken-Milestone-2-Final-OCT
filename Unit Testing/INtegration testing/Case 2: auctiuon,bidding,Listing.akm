@@ -1,0 +1,22 @@
+test "auction listing and bid placement on NFT" {
+    // Arrange
+    let auctioneer = addr("addr_test1...")
+    let bidder = addr("addr_test2...")
+    let nft = mint_nft(auctioneer, "AuctionNFT")
+
+    // Act: List the NFT for auction by Auctioneer
+    let auction_listing = list_nft_for_auction(nft, auctioneer)
+
+    // Assert: Check that the auction is active
+    assert_eq(auction_listing.is_active, true)
+
+    // Act: Bidder places a bid
+    place_bid(auction_listing, bidder, 500)
+
+    // Act: Auction ends, and the highest bidder gets the NFT
+    let auction_result = end_auction(auction_listing)
+
+    // Assert: Check that the NFT is transferred to the highest bidder (Owner B)
+    assert_eq(auction_result.winner, bidder)
+    assert_eq(auction_result.nft.owner, bidder)
+}

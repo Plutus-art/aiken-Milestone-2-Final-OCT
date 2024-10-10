@@ -1,0 +1,15 @@
+### Define Contract Specifications with Formal Verification Features
+
+
+The first step is to define the **formal specification** of your contract, which describes how the contract should behave in all possible situations.
+
+```aiken
+-- Example: Formal specification for an NFT transfer function
+-- Preconditions:
+-- 1. The sender must own the NFT.
+-- 2. The transaction must include a valid signature.
+-- 3. The new owner must be a valid public key.
+
+-- Postconditions:
+-- 1. Ownership of the NFT is transferred to the new owner.
+-- 2. The sender no longer holds the NFT.
