@@ -60,7 +60,7 @@ Unlike general-purpose languages, Aiken is built with Cardano in mind. It provid
 Considering the critical nature of smart contracts, Aiken keeps the language itself small and focused. This allows for easier understanding and reduces the risk of introducing vulnerabilities.
 
 
-2
+----------------------------------------------------------------------------------------
 
 
 ### Feature Design: 
@@ -93,4 +93,39 @@ Formal Verification: Aiken might integrate with tools for formal verification, a
 
 
 
+### # Coding Standards: 
+While Aiken-lang has a focus on developer experience, there isn't a formal document outlining a strict coding standard like some other languages. However, there are resources that can guide you in writing clean and secure Aiken code:
+
+## Standard Library (stdlib): The Aiken standard library (https://github.com/aiken-lang/stdlib) serves as a good reference. It showcases well-written and well-tested Aiken code, providing examples of idiomatic usage.
+
+--*Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Standard%20Library%20(stdlib).md
+
+## Community Resources: The Aiken project likely has a community around it. Searching for resources like community forums, discussions, or blog posts related to "Aiken coding practices" or "Aiken best practices" might reveal conventions or preferred coding styles within the community.
+General Smart Contract Security: Since Aiken targets smart contracts, security best practices for smart contract development are generally applicable. Resources on secure smart contract coding in general can provide valuable guidance.
+
+   -* Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markldown%20Community%20Resource.md
+
+
+### General Smart Contract Security: Since Aiken targets smart contracts, security best practices for smart contract development are generally applicable. Resources on secure smart contract coding in general can provide valuable guidance.
+
+   -*Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20%20General%20Smart%20Contract%20Security.md
+
+------------------------------------------------------------------------------------------------------------------
+
+### Development: 
+Implement the new features according to their specifications.
+Comprehensive testing documentation that includes test plans, test cases, and results for unit tests, integration tests, and performance tests of the developed features.
+
+-*Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Development.md
+
+## Develop Test Plans: Create detailed test plans for each new feature, specifying the testing objectives, scope, approach, resources, and schedule.
+
+### Test Plan: 
+Developed Features & Functions: List of all functions available on Aiken
+--- Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20The%20developed%20features.md
+
+### Aiken-Plooty Milestone 2
+Developing New Features & Test Result: List of new functions we want to develop
+    --Markdown: https://github.com/Plutus-art/aiken-Milestone-2-Final-OCT/blob/main/Markdown%20Aiken%20language%20features%20(focus%20on%20marketplace%20smart%20contracts).md
+Aiken-Lang Functions Testing
 
